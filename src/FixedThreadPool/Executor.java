@@ -4,14 +4,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class Executor {
-    ThreadPoolExecutor cachedExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+    int nThreads = Runtime.getRuntime().availableProcessors();
+    ThreadPoolExecutor fixedExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(nThreads);
 
     void execute(PotentialScript script){
-        cachedExecutor.execute(script);
+        fixedExecutor.execute(script);
     }
 
     void shutdown(){
-        cachedExecutor.shutdown();
+        fixedExecutor.shutdown();
     }
 
 }
